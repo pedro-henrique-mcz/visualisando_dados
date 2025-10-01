@@ -8,6 +8,7 @@ class RandomWalk():
         #nosso codigo
         self.x_values = [0]
         self.y_values = [0]
+        self.xy_values = [(0,0)]
 
     def fill_walk(self):
         ''''''
@@ -15,8 +16,8 @@ class RandomWalk():
         #desejado
         while len(self.x_values) < self.num_points:
                 
-            x_step = self.get_steps()
-            y_step = self.get_steps()
+            x_step = self.next_step()
+            y_step = self.next_step()
 
             if x_step == 0 and y_step ==0:
                 continue
@@ -24,10 +25,11 @@ class RandomWalk():
             next_x = self.x_values[-1] + x_step
             next_y = self.y_values[-1] + y_step
 
+            self.xy_values.append((next_x, next_y))
             self.x_values.append(next_x)
             self.y_values.append(next_y)
 
-    def get_steps(self):
+    def next_step(self):
         ''''''
         direction = choice([1, -1])
         distance = choice(list(range(5)))
